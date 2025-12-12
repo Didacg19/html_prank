@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Simulació de Hackeo</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: monospace;
+      padding: 20px;
+    }
+    .line {
+      margin: 5px 0;
+    }
+    .warning {
+      color: red;
+      font-weight: bold;
+    }
+    .success {
+      color: cyan;
+    }
+  </style>
+</head>
+<body>
+  <h2>*** INICIANDO ESCANEO DEL SISTEMA ***</h2>
+  <div id="output"></div>
+
+  <script>
+    // Líneas que se van a mostrar
+    const lines = [
+      "[OK] Conectando al servidor...",
+      "[OK] Analizando contraseñas...",
+      "[ALERTA] Se han detectado 42 contraseñas",
+      "[OK] Robando información...",
+      "[FINALIZADO] Información extraida con exito",
+      ">>>"
+    ];
+
+    const output = document.getElementById("output");
+    let index = 0;
+
+    function showLine() {
+      if (index < lines.length) {
+        const div = document.createElement("div");
+        div.className = "line";
+        if (lines[index].includes("ALERTA")) div.className += " warning";
+        if (lines[index].includes("FINALIZADO")) div.className += " success";
+        div.textContent = lines[index];
+        output.appendChild(div);
+        index++;
+        setTimeout(showLine, 1500); // tiempo entre líneas (1.5s)
+      }
+    }
+
+    // Iniciar animación
+    showLine();
+  </script>
+</body>
+</html>
